@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet(value = "/register")
-public class CashifyController extends HttpServlet {
+public class CashifyRegistrationController extends HttpServlet {
 
 	
 	@Override

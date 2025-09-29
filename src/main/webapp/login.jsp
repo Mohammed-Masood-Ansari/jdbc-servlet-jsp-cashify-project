@@ -36,6 +36,10 @@ body {
 </head>
 <body>
 
+	<%
+		String message = (String) request.getAttribute("msg");
+	%>
+
 	<jsp:include page="header.jsp"></jsp:include>
 
 	<div class="container login-container">
@@ -45,10 +49,13 @@ body {
 					<h2 class="form-title">Login to Cashify</h2>
 					<form action="login" method="post">
 						<!-- Username / Email -->
+						<%if(message!=null){ %>
+							<h5 style="color: red;"><%=message%></h5>
+						<%}%>
 						<div class="mb-3">
 							<label for="username" class="form-label">Email / Username</label>
 							<input type="text" class="form-control" id="username"
-								name="username" required>
+								name="email" required>
 						</div>
 
 						<!-- Password -->

@@ -1,3 +1,4 @@
+<%@page import="jakarta.servlet.http.HttpSession"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -9,6 +10,11 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
 </head>
 <body >
+	<%
+		HttpSession httpSession=request.getSession();
+	
+		if(httpSession.getAttribute("userSession")!=null){
+	%>
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="container">
 		<h2>Sell Your Phone</h2>
@@ -100,6 +106,14 @@
 
 		</form>
 	</div>
-
+	<%} else{%>
+	
+		<%
+		request.setAttribute("msg","please login with user then access it");
+		
+		request.getRequestDispatcher("login.jsp").forward(request, response);
+		%>
+	
+	<%}%>
 </body>
 </html>

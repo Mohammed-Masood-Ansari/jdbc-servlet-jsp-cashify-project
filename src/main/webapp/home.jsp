@@ -1,3 +1,4 @@
+<%@page import="jakarta.servlet.http.HttpSession"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -9,9 +10,8 @@
 <title>HomePage</title>
 </head>
 <body>
-		
 	<jsp:include page="header.jsp"></jsp:include>
-	
+
 	<!-- carousel started from here -->
 
 	<div id="carouselExampleCaptions" class="carousel slide w-50 mx-auto"
@@ -68,7 +68,9 @@
 	OUR-SERVICES
 	<!-- Button with image -->
 	<button type="button" class="btn btn-primary d-flex align-items-center">
-		<a href="sell-phone.jsp"><img src="https://s3n.cashify.in/cashify/store/product//122d9596dd4a4034a9192e5e8ba30c4f-box.jpg" alt="icon" class="me-2" height="70px" width="50px"></a>
+		<a href="sell-phone.jsp"><img
+			src="https://s3n.cashify.in/cashify/store/product//122d9596dd4a4034a9192e5e8ba30c4f-box.jpg"
+			alt="icon" class="me-2" height="70px" width="50px"></a>
 	</button>
 	SELL-PHONE
 
