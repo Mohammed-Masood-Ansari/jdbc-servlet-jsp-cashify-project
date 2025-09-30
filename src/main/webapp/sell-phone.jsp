@@ -9,39 +9,45 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
 </head>
-<body >
+<body>
 	<%
-		HttpSession httpSession=request.getSession();
-	
-		if(httpSession.getAttribute("userSession")!=null){
+	HttpSession httpSession = request.getSession();
+
+	if (httpSession.getAttribute("userSession") != null) {
 	%>
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="user-navbar.jsp"></jsp:include>
 	<div class="container">
 		<h2>Sell Your Phone</h2>
-		<form>
+		<form action="sellPhone" method="post" enctype="multipart/form-data">
+
+			<!-- ID -->
+			<div class="mb-3">
+				<label for="name" class="form-label">ID</label> <input
+					type="text" class="form-control" id="name" name="id" required>
+			</div>
 
 			<!-- Full Name -->
 			<div class="mb-3">
 				<label for="name" class="form-label">Full Name</label> <input
-					type="text" class="form-control" id="name" required>
+					type="text" class="form-control" id="name" name="name" required>
 			</div>
 
 			<!-- Email -->
 			<div class="mb-3">
 				<label for="email" class="form-label">Email address</label> <input
-					type="email" class="form-control" id="email" required>
+					type="email" class="form-control" id="email" name="email" required>
 			</div>
 
 			<!-- Phone -->
 			<div class="mb-3">
 				<label for="phone" class="form-label">Phone Number</label> <input
-					type="tel" class="form-control" id="phone">
+					type="tel" class="form-control" id="phone" name="phone">
 			</div>
 
 			<!-- Brand -->
 			<div class="mb-3">
 				<label for="brand" class="form-label">Brand</label> <select
-					class="form-select" id="brand" required>
+					class="form-select" id="brand" name="brand" required>
 					<option selected disabled>Choose brand</option>
 					<option>Apple</option>
 					<option>Samsung</option>
@@ -54,13 +60,13 @@
 			<!-- Model -->
 			<div class="mb-3">
 				<label for="model" class="form-label">Model</label> <input
-					type="text" class="form-control" id="model" required>
+					type="text" class="form-control" id="model" name="model" required>
 			</div>
 
 			<!-- Storage -->
 			<div class="mb-3">
 				<label for="storage" class="form-label">Storage Capacity</label> <select
-					class="form-select" id="storage" required>
+					class="form-select" id="storage" name="storage" required>
 					<option selected disabled>Choose storage</option>
 					<option>32 GB</option>
 					<option>64 GB</option>
@@ -73,7 +79,7 @@
 			<!-- Condition -->
 			<div class="mb-3">
 				<label for="condition" class="form-label">Condition</label> <select
-					class="form-select" id="condition" required>
+					class="form-select" id="condition" name="condition" required>
 					<option selected disabled>Select condition</option>
 					<option>New</option>
 					<option>Like New</option>
@@ -86,19 +92,21 @@
 			<!-- Expected Price -->
 			<div class="mb-3">
 				<label for="price" class="form-label">Expected Price ($)</label> <input
-					type="number" class="form-control" id="price" required>
+					type="number" class="form-control" id="price" name="price" required>
 			</div>
 
 			<!-- Comments -->
 			<div class="mb-3">
 				<label for="comments" class="form-label">Additional Comments</label>
-				<textarea class="form-control" id="comments" rows="3"></textarea>
+				<textarea class="form-control" id="comments" name="comments"
+					rows="3"></textarea>
 			</div>
 
 			<!-- Image Upload -->
 			<div class="mb-3">
 				<label for="image" class="form-label">Upload Phone Image</label> <input
-					class="form-control" type="file" id="image" accept="image/*">
+					class="form-control" type="file" id="image" name="image"
+					accept="image/*">
 			</div>
 
 			<!-- Submit Button -->
@@ -106,14 +114,18 @@
 
 		</form>
 	</div>
-	<%} else{%>
-	
-		<%
-		request.setAttribute("msg","please login with user then access it");
-		
-		request.getRequestDispatcher("login.jsp").forward(request, response);
-		%>
-	
-	<%}%>
+	<%
+	} else {
+	%>
+
+	<%
+	request.setAttribute("msg", "please login with user then access it");
+
+	request.getRequestDispatcher("login.jsp").forward(request, response);
+	%>
+
+	<%
+	}
+	%>
 </body>
 </html>
