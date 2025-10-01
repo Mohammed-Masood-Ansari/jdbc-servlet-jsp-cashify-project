@@ -2,7 +2,10 @@ package com.cashify.servlet_cashify_project.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.cashify.servlet_cashify_project.connection.CashifyConnection;
 import com.cashify.servlet_cashify_project.dto.OldPhone;
@@ -13,7 +16,7 @@ public class OldPhoneDao {
 
 	public OldPhone saveOldPhoneDao(OldPhone oldPhone) {
 
-		String insertQueryOldPhone = "insert into old-phone(id,name,email,phone,brand,model,storage,condition,expected-price,comments,image,verification) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+		String insertQueryOldPhone = "insert into old_phone(id,name,email,phone,brand,model,storage,conditions,expected_price,comments,image,verification) values(?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		try {
 
@@ -39,4 +42,43 @@ public class OldPhoneDao {
 			return null;
 		}
 	}
+	
+
+	public List<OldPhone> getAllOldPhones() {
+		
+	    List<OldPhone> oldPhones = new ArrayList<>();
+	    
+	    String query = "SELECT * FROM old_phone";
+	    
+	    try (PreparedStatement p = connection.prepareStatement(query);
+	    		
+	         ResultSet rs = p.executeQuery()) {
+
+	        while (rs.next()) {
+	        	
+	            OldPhone phone = new OldPhone();
+	            
+	            phone.setId(rs.getInt("id"));
+	            phone.setName(rs.getString("name"));
+	            phone.setEmail(rs.getString("email"));
+	            phone.setPhone(rs.getLong("phone"));
+	            phone.setBrand(rs.getString("brand"));
+	            phone.setModel(rs.getString("model"));
+	            phone.setStorage(rs.getString("storage"));
+	            phone.setCondition(rs.getString("conditions")); // Note: changed from 'condition' to 'conditions'
+	            phone.setExpectedprice(rs.getDouble("expected_price"));
+	            phone.setComments(rs.getString("comments"));
+	            phone.setImage(rs.getBytes("image"));
+	            phone.setVerification(rs.getString("verification"));
+
+	            oldPhones.add(phone);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return oldPhones;
+	}
+
+	
 }

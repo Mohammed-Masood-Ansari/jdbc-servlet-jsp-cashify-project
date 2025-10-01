@@ -62,7 +62,8 @@ public class UserDao {
 				User user = new User();
 				user.setEmail(resultSet.getString("email"));
 				user.setPassword(resultSet.getString("password"));
-
+				user.setName(resultSet.getString("name"));
+				user.setPhone(resultSet.getLong("phone"));;
 				return user;
 			}
 			return null;

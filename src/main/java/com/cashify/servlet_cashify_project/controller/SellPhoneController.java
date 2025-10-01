@@ -24,7 +24,7 @@ public class SellPhoneController extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("name");
         String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
+        long phone = Long.parseLong(request.getParameter("phone"));
         String brand = request.getParameter("brand");
         String model = request.getParameter("model");
         String storage = request.getParameter("storage");
@@ -41,7 +41,7 @@ public class SellPhoneController extends HttpServlet {
         oldPhone.setId(id);
         oldPhone.setName(name);
         oldPhone.setEmail(email);
-        oldPhone.setPhone(id);
+        oldPhone.setPhone(phone);
         oldPhone.setBrand(brand);
         oldPhone.setModel(model);
         oldPhone.setStorage(storage);

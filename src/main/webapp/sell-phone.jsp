@@ -1,3 +1,5 @@
+<%@page import="com.cashify.servlet_cashify_project.dto.User"%>
+<%@page import="com.cashify.servlet_cashify_project.dao.UserDao"%>
 <%@page import="jakarta.servlet.http.HttpSession"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -12,8 +14,10 @@
 <body>
 	<%
 	HttpSession httpSession = request.getSession();
+	String email = (String) httpSession.getAttribute("userSession");
+	if (email != null) {
 
-	if (httpSession.getAttribute("userSession") != null) {
+		User user = new UserDao().getUserByEmailDao(email);
 	%>
 	<jsp:include page="user-navbar.jsp"></jsp:include>
 	<div class="container">
@@ -22,26 +26,26 @@
 
 			<!-- ID -->
 			<div class="mb-3">
-				<label for="name" class="form-label">ID</label> <input
-					type="text" class="form-control" id="name" name="id" required>
+				<label for="name" class="form-label">ID</label> <input type="text"
+					class="form-control" id="name" name="id" required>
 			</div>
 
 			<!-- Full Name -->
 			<div class="mb-3">
 				<label for="name" class="form-label">Full Name</label> <input
-					type="text" class="form-control" id="name" name="name" required>
+					type="text" class="form-control" id="name" name="name" value="<%=user.getName()%>" required>
 			</div>
 
 			<!-- Email -->
 			<div class="mb-3">
 				<label for="email" class="form-label">Email address</label> <input
-					type="email" class="form-control" id="email" name="email" required>
+					type="email" class="form-control" id="email" name="email" value="<%=user.getEmail()%>" required>
 			</div>
 
 			<!-- Phone -->
 			<div class="mb-3">
 				<label for="phone" class="form-label">Phone Number</label> <input
-					type="tel" class="form-control" id="phone" name="phone">
+					type="tel" class="form-control" id="phone" name="phone" value="<%=user.getPhone()%>">
 			</div>
 
 			<!-- Brand -->
