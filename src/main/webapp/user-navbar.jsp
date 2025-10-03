@@ -36,7 +36,7 @@
             </form>
 
             <!-- Logout button -->
-            <form action="logout.jsp" method="post">
+            <form action="login.jsp" method="post">
                 <button class="btn btn-danger" type="submit">Logout</button>
             </form>
         </div>

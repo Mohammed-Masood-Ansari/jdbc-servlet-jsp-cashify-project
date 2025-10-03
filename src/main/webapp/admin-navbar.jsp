@@ -29,9 +29,9 @@
 
 			<div class="collapse navbar-collapse" id="adminNavbar">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link" href="/admin/sellers">Sellers</a>
+					<li class="nav-item"><a class="nav-link" href="#">Sellers</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="/admin/users">Users</a>
+					<li class="nav-item"><a class="nav-link" href="user-oldphones.jsp">Users</a>
 					</li>
 					<li class="nav-item"><a class="nav-link"
 						href="/admin/delivery-persons">Delivery Persons</a></li>

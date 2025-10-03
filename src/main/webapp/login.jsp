@@ -37,6 +37,12 @@ body {
 <body>
 
 	<%
+		String userSession=(String)session.getAttribute("userSession");
+		
+		if(userSession!=null){
+			request.setAttribute("msg","you are logout successfully");
+			session.invalidate();
+		}
 		String message = (String) request.getAttribute("msg");
 	%>
 

@@ -80,5 +80,17 @@ public class OldPhoneDao {
 	    return oldPhones;
 	}
 
+	public boolean updateOldPhoneVerification(String verify,int id) {
+		try {
+            String sql = "UPDATE old_phone SET verification = ? WHERE id = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+                ps.setString(1, verify);
+                ps.setInt(2, id);
+                return ps.executeUpdate()!=0?true:false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+	}
 	
 }
