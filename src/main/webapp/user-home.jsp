@@ -7,6 +7,45 @@
 <title>USER-HOME</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+<style>
+.service-button {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	background-color: #007bff;
+	color: white;
+	padding: 15px;
+	border-radius: 10px;
+	width: 150px;
+	transition: transform 0.3s, background-color 0.3s;
+}
+
+.service-button:hover {
+	background-color: #0056b3;
+	transform: scale(1.05);
+}
+
+.service-button img {
+	height: 70px;
+	width: 50px;
+	margin-bottom: 10px;
+}
+
+.services-container {
+	display: flex;
+	gap: 30px;
+	justify-content: center;
+	align-items: center;
+	padding: 40px 0;
+}
+
+.service-label {
+	margin-top: 8px;
+	font-weight: bold;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="user-navbar.jsp"></jsp:include>
@@ -64,14 +103,25 @@
 				class="visually-hidden">Next</span>
 		</button>
 	</div>
-	OUR-SERVICES
-	<!-- Button with image -->
-	<button type="button" class="btn btn-primary d-flex align-items-center">
-		<a href="sell-phone.jsp"><img
-			src="https://s3n.cashify.in/cashify/store/product//122d9596dd4a4034a9192e5e8ba30c4f-box.jpg"
-			alt="icon" class="me-2" height="70px" width="50px"></a>
-	</button>
-	SELL-PHONE
+	<div class="container text-center">
+		<h2 class="mb-4">OUR SERVICES</h2>
+
+		<div class="services-container">
+			<!-- Sell Phone -->
+			<a href="sell-phone.jsp" class="service-button"> <img
+				src="https://s3n.cashify.in/cashify/store/product//122d9596dd4a4034a9192e5e8ba30c4f-box.jpg"
+				alt="Sell Phone">
+				<div class="service-label">SELL PHONE</div>
+			</a>
+
+			<!-- Purchase Phone -->
+			<a href="buy-phone.jsp" class="service-button"> <img
+				src="https://s3n.cashify.in/cashify/store/product//122d9596dd4a4034a9192e5e8ba30c4f-box.jpg"
+				alt="Purchase Phone">
+				<div class="service-label">Buy PHONE</div>
+			</a>
+		</div>
+	</div>
 
 	<!-- carousel ended here-->
 	<script type="text/javascript"
