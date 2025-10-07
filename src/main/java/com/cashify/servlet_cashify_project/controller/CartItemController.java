@@ -1,10 +1,13 @@
 package com.cashify.servlet_cashify_project.controller;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import com.cashify.servlet_cashify_project.dao.CartItemDao;
+import com.cashify.servlet_cashify_project.dao.OldPhoneDao;
 import com.cashify.servlet_cashify_project.dao.UserDao;
 import com.cashify.servlet_cashify_project.dto.Cart;
+import com.cashify.servlet_cashify_project.dto.CartItems;
 import com.cashify.servlet_cashify_project.dto.User;
 
 import jakarta.servlet.ServletException;
@@ -32,11 +35,43 @@ public class CartItemController extends HttpServlet {
 			
 			int userId = user.getId();
 			
+			/**
+			 * cart object created....
+			 */
 			Cart cart= new Cart();
 			cart.setUserId(userId);
 			
 			cart.setStatus("pending");
-			new CartItemDao().saveProductIntoCartDao(cart);
+			
+			CartItemDao cartItemDao=new CartItemDao();
+			
+			cartItemDao.saveProductIntoCartDao(cart);
+			
+			/**
+			 * to fetcch cart details
+			 */
+			Cart cart2=cartItemDao.getCartDetails(userId);
+			
+			
+			/**
+			 * to get the product price
+			 */
+			
+			double productPrice=new OldPhoneDao().getOldPhonePriceByIdDao(productId);
+			/**
+			 * cartitems object created....
+			 */
+			CartItems cartItems = new CartItems();
+			
+			cartItems.setCartid(cart2.getId());
+			cartItems.setDatetimes(LocalDateTime.now());
+			cartItems.setProductid(productId);
+			cartItems.setPrice(productPrice);
+			cartItems.setQuantity(1);
+			
+			
+			
+			cartItemDao.saveCartItemsDao(cartItems);
 			
 			resp.sendRedirect("user-cart.jsp");
 		}
