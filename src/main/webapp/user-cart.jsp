@@ -84,14 +84,14 @@ button {
 				<p>Price:₹<%=items.getPrice()%></p>
 			</div>
 			<div class="item-actions">
-				<form action="updateCart" method="post" style="display: inline;">
-					<input type="hidden" name="productId"
-						value="<%=items.getProductid()%>" />
+				<form action="decrementCartItems" method="post" style="display: inline;">
+					<input type="hidden" name="itemsId"
+						value="<%=items.getItemsid()%>" />
 					<button name="action" value="decrease">-</button>
 				</form>
-				<span>Qty: <%=items.getQuantity()%></span>
-				<form action="updateCart" method="post" style="display: inline;">
-					<input type="hidden" name="productId"
+				<span>Qty:<%=items.getQuantity()%></span>
+				<form action="incrementCartItems" method="post" style="display: inline;">
+					<input type="hidden" name="itemsId"
 						value="<%=items.getItemsid()%>" />
 					<button name="action" value="increase">+</button>
 				</form>
@@ -100,7 +100,12 @@ button {
 		<%
 		}
 		}
+		
+			request.setAttribute("cartData", cartItems);
 		%>
+		<form action="buyNow" method="post">
+			<input type="submit" value="BuyNow">
+		</form>
 	</div>
 </body>
 </html>

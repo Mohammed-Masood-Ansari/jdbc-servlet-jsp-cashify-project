@@ -115,4 +115,56 @@ public class CartItemDao {
 			return null;
 		}
 	}
+	
+	public boolean updateCartItemsQuantityAndPriceDao(int quantity,double price,int itemsId) {
+		
+		try {
+			
+			String updateQuery = "update cart_items set quantity=?, price=? where id=?";
+			
+			PreparedStatement ps = connection.prepareStatement(updateQuery);
+			
+			ps.setInt(1, quantity);
+			ps.setDouble(2, price);
+			ps.setInt(3, itemsId);
+			
+			return ps.executeUpdate()>0?true:false;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public CartItems getCartItemsByItemsIdDao(int cartItemsId) {
+		try {
+
+			String cartItemInsertQuery = "select * from cart_items where id=?";
+
+			PreparedStatement ps = connection.prepareStatement(cartItemInsertQuery);
+
+			ps.setInt(1, cartItemsId);
+			
+
+			ResultSet set=ps.executeQuery();
+			
+			if(set.next()) {
+				
+				CartItems cartItems = new CartItems();
+				cartItems.setCartid(set.getInt("cartid"));
+				cartItems.setItemsid(set.getInt("id"));
+				cartItems.setPrice(set.getDouble("price"));
+				cartItems.setQuantity(set.getInt("quantity"));
+				cartItems.setProductid(set.getInt("productid"));
+				
+				return cartItems;
+			}
+			
+			return null;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }
