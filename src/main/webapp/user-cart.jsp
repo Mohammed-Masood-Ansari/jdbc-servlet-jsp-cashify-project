@@ -1,3 +1,7 @@
+<%@page import="com.cashify.servlet_cashify_project.dto.Cart"%>
+<%@page import="com.cashify.servlet_cashify_project.dto.User"%>
+<%@page import="com.cashify.servlet_cashify_project.dao.UserDao"%>
+<%@page import="jakarta.servlet.http.HttpSession"%>
 <%@page import="java.util.Base64"%>
 <%@page import="com.cashify.servlet_cashify_project.dto.OldPhone"%>
 <%@page import="com.cashify.servlet_cashify_project.dao.OldPhoneDao"%>
@@ -10,7 +14,8 @@
 <html>
 <head>
 <title>Cart</title>
-<meta name="viewport" content="width=device-width, initial-scale=1"  charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"
+	charset="UTF-8">
 <style>
 /* Responsive CSS */
 .cart-container {
@@ -63,7 +68,22 @@ button {
 		<%
 		OldPhoneDao dao=new OldPhoneDao();
 		
-		List<CartItems> cartItems = new CartItemDao().getAllCartItemsDetails();
+		CartItemDao cartItemDao=new CartItemDao();
+		
+		UserDao userDao = new UserDao();
+		
+		HttpSession httpSession  = request.getSession();
+		
+		String email=(String)httpSession.getAttribute("userSession");
+		
+		User user = userDao.getUserByEmailDao(email);
+		
+		Cart cart=cartItemDao.getCartDetails(user.getId());
+		
+		
+		
+		if(cart!=null){
+		List<CartItems> cartItems = cartItemDao.getCartItemsByCartId(cart.getId());
 		if (cartItems == null || cartItems.isEmpty()) {
 		%>
 		<p>Your cart is empty.</p>
@@ -81,29 +101,30 @@ button {
 			<div class="item-info">
 				<h4><%=oldPhone.getBrand()%></h4>
 				<h4><%=oldPhone.getModel()%></h4>
-				<p>Price:₹<%=items.getPrice()%></p>
+				<p>
+					Price:₹<%=items.getPrice()%></p>
 			</div>
 			<div class="item-actions">
-				<form action="decrementCartItems" method="post" style="display: inline;">
-					<input type="hidden" name="itemsId"
-						value="<%=items.getItemsid()%>" />
+				<form action="decrementCartItems" method="post"
+					style="display: inline;">
+					<input type="hidden" name="itemsId" value="<%=items.getItemsid()%>" />
 					<button name="action" value="decrease">-</button>
 				</form>
 				<span>Qty:<%=items.getQuantity()%></span>
-				<form action="incrementCartItems" method="post" style="display: inline;">
-					<input type="hidden" name="itemsId"
-						value="<%=items.getItemsid()%>" />
+				<form action="incrementCartItems" method="post"
+					style="display: inline;">
+					<input type="hidden" name="itemsId" value="<%=items.getItemsid()%>" />
 					<button name="action" value="increase">+</button>
 				</form>
 			</div>
 		</div>
 		<%
 		}
-		}
-		
-			request.setAttribute("cartData", cartItems);
+		}}else{
 		%>
-		<form action="buyNow" method="post">
+			<p>your cart is empty</p>
+		<%}%>
+		<form action="orderCartItems" method="get">
 			<input type="submit" value="BuyNow">
 		</form>
 	</div>

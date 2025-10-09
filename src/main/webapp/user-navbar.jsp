@@ -36,6 +36,8 @@
 					<!-- Other nav items -->
 					<li class="nav-item"><a class="nav-link active"
 						href="profile.jsp">Profile</a></li>
+					<li class="nav-item"><a class="nav-link active"
+						href="add-user-address.jsp">add-address</a></li>
 					<li class="nav-item"><a
 						class="nav-link active position-relative text-white"
 						href="user-cart.jsp"> <i
